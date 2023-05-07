@@ -1,14 +1,24 @@
 const express = require("express");
 const router = express.Router();
-// const Record = require("../../models/record");
+const Record = require("../../models/record")
 
-// creat page
+// creat new page
 router.get("/new", (req, res) => {
   res.render("new"); 
 });
 
-router.get("/edit", (req, res) => {
-  res.render("edit");
+
+// edit page
+router.get("/:id/edit", (req, res) => {
+  const userId = req.user._id;
+  const _id = req.params.id;
+  Restaurant.findById({ _id, userId })
+    .lean()
+    .then((restaurants) => res.render("edit", { restaurants }))
+    .catch((error) => console.error(error));
 });
+
+
+
 
 module.exports = router;

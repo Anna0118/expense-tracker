@@ -39,11 +39,12 @@ db.once("open", async () => {
       // Calculate records per user
       const recordsPerUser = Math.ceil(recordList.length / SEED_USER.length);
       // Get records for the current user
-    //   const userId = newUser._id;
       const userRecords = recordList.slice(
         index * recordsPerUser,
         (index + 1) * recordsPerUser
       ); //(0,3), (3,6)
+
+      // Map userRecords and assign userId and categoryId to each record
       const recordPromises = userRecords.map(async (record) => {
         record.userId = newUser._id;
         record.categoryId = categoryMap.get(record.categoryName);
