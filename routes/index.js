@@ -10,7 +10,7 @@ const auth = require("./modules/auth");
 
 // router.use("/records", authenticator, records);
 router.use("/records",records);
-// router.use("/users", users);
+router.use("/users", users);
 // router.use("/auth", auth);
 router.use("/", home);
 
