@@ -17,40 +17,46 @@ db.on("error", () => {
 });
 
 db.once("open", async () => {
-  //find category
-  const categories = await Category.find();
-  const categoryMap = new Map();
-  categories.forEach((category) => {
-    categoryMap.set(category.name, category._id);
-  });
-  const userPromises = SEED_USER.map((user, index) =>
-    bcrypt
-      .genSalt(10)
-      .then((salt) => bcrypt.hash(user.password, salt))
-      .then((hash) =>
-        User.create({
-          name: user.name,
-          email: user.email,
-          password: hash,
-        })
-      )
-      .then((user) => {
-        const userId = user._id;
-        const userRecords = recordList.slice(index * 2, (index + 1) * 2); //(0,3), (3,6)
-        const recordPromises = userRecords.map((record) => {
-          record.userId = userId;
-          record.categoryId = record.categoryId;
-          return Record.create(record);
-        });
-        return Promise.all(recordPromises);
-      })
-  );
-  Promise.all(userPromises)
-    .then(() => {
-      console.log("done.");
-      process.exit();
-    })
-    .catch((error) => {
-      console.error(error);
+  try {
+    //find category
+    const categories = await Category.find();
+    const categoryMap = new Map();
+    categories.forEach((category) => {
+      categoryMap.set(category.name, category._id);
     });
+
+    // Iterate through each seed user
+    const userPromises = SEED_USER.map(async (user, index) => {
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(user.password, salt);
+      // Create a user with hashed password
+      const newUser = await User.create({
+        name: user.name,
+        email: user.email,
+        password: hash,
+      });
+
+      // Calculate records per user
+      const recordsPerUser = Math.ceil(recordList.length / SEED_USER.length);
+      // Get records for the current user
+    //   const userId = newUser._id;
+      const userRecords = recordList.slice(
+        index * recordsPerUser,
+        (index + 1) * recordsPerUser
+      ); //(0,3), (3,6)
+      const recordPromises = userRecords.map(async (record) => {
+        record.userId = newUser._id;
+        record.categoryId = categoryMap.get(record.categoryName);
+        return Record.create(record);
+      });
+      await Promise.all(recordPromises);
+    });
+
+    await Promise.all(userPromises);
+
+    console.log("done.");
+    process.exit();
+  } catch (error) {
+    console.error(error);
+  }
 });
