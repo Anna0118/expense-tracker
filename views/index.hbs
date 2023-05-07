@@ -24,30 +24,44 @@
               <option>餐飲食品</option>
               <option>其他</option>
             </select>
+            {{!-- <select
+              id="categoryOptions"
+              class="form-control"
+              name="categoryId"
+              required
+            >
+              {{#each categories}}
+                <option value="{{this._id}}">{{this.name}}</option>
+              {{/each}} --}}
+            </select>
           </div>
           <h2 class="text-center mb-4">總金額：{{totalAmount}}</h2>
           <ul class="list-group">
-            {{!-- {{#each expenses}} --}}
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <div>
-                <img src="{{icon}}" alt="{{category}}" width="30" height="30" />
-                {{!-- <span>{{category}}</span>
-                  <small>{{createdAt}}</small> --}}
-                <span>家庭物業</span>
+            {{#each records}}
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
                 <div>
-                  <small>2020</small>
+                  <img
+                    src="{{icon}}"
+                    alt="{{category}}"
+                    width="30"
+                    height="30"
+                  />
+                  <span>{{name}}</span>
+                  <small>{{date}}</small>
                 </div>
-              </div>
-              <div>
-                {{!-- <span class="badge badge-primary badge-pill">{{amount}}</span> --}}
-                <span class="badge badge-primary badge-pill mr-3">100</span>
-                <a class="btn btn-sm btn-warning" href="/records/edit">修改</a>
-                <button class="btn btn-sm btn-danger">刪除</button>
-              </div>
-            </li>
-            {{!-- {{/each}} --}}
+                <div>
+                  <span class="badge badge-primary badge-pill">{{amount}}</span>
+                  <span class="badge badge-primary badge-pill mr-3">100</span>
+                  <a
+                    class="btn btn-sm btn-warning"
+                    href="/records/edit"
+                  >修改</a>
+                  <button class="btn btn-sm btn-danger">刪除</button>
+                </div>
+              </li>
+            {{/each}}
           </ul>
           <div class="text-center mt-3">
             <a class="btn btn-primary" href="/records/new">新增支出</a>

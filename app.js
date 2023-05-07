@@ -16,7 +16,17 @@ const usePassport = require("./config/passport");
 const app = express();
 const PORT = process.env.PORT;
 
-app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
+app.engine(
+  "hbs",
+  exphbs({
+    defaultLayout: "main",
+    extname: ".hbs",
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  })
+);
 app.set("view engine", "hbs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
