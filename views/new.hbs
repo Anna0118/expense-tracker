@@ -1,0 +1,88 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">請輸入你的支出
+            <small>*必填欄位</small>
+            <i class="fas fa-edit"></i></h5>
+          <hr />
+          <form method="POST" action="/records">
+            <div class="row mb-3 g-2">
+              <label for="name" class="col-md-4 col-form-label">
+                名稱*
+              </label>
+              <div class="col-md-8">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  id="name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row mb-3 g-2">
+              <label for="name_en" class="col-md-4 col-form-label">
+                日期*
+              </label>
+              <div class="col-md-8">
+                <input
+                  type="date"
+                  name="date"
+                  class="form-control"
+                  id="date"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row mb-3 g-2">
+              <label for="category" class="col-md-4 col-form-label">
+                類別*
+              </label>
+              <div class="col-md-8">
+                <select
+                  id="categoryOptions"
+                  class="form-control"
+                  name="category"
+                  required
+                >
+                  <option>家居物業</option>
+                  <option>交通出行</option>
+                  <option>休閒娛樂</option>
+                  <option>餐飲食品</option>
+                  <option>其他</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3 g-2">
+              <label for="cost" class="col-md-4 col-form-label">
+                金額
+              </label>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  name="cost"
+                  class="form-control"
+                  id="cost"
+                  required
+                />
+              </div>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">新增</button>
+              <a href="/">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                >返回</button>
+              </a>
+              {{! 使用type="reset" 可以清除/還原輸入 }}
+              <button type="reset" class="btn btn-outline-danger">還原</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
