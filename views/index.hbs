@@ -28,21 +28,36 @@
       <div class="card mt-5">
         <div class="card-body">
           <div class="form-group">
-            <select class="form-control" id="category">
-              {{#each categories}}
+            <form method="GET" action="/category">
+            <select class="form-select" id="categoryId" name="categoryId" onchange="submit()">
+              <option selected value="">類別</option>
+              {{!-- {{#each categories}}
                 <option value="{{this._id}}">{{this.name}}</option>
+              {{/each}} --}}
+              {{#each categories}}
+              <option {{#if this.isSelected}} selected {{/if}} value="{{ this._id }}">{{ this.name }}</option>
               {{/each}}
             </select>
+            </form>
           </div>
-          <h2 class="text-center mb-4">總金額：{{totalAmount}}</h2>
+          <h2
+            class="text-center mb-4"
+            id="totalAmount"
+          >總金額：{{totalAmount}}</h2>
           <ul class="list-group">
             {{#each records}}
               <li
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
                 <div class="record-info">
-                  <i class="fas {{this.categoryId.icon}} category-icon"></i>
-                  <span class="record-name" style="font-size: 22px;">{{this.name}}</span>
+                  <i
+                    value={{this.categoryId._id}}
+                    class="fas {{this.categoryId.icon}} category-icon"
+                  ></i>
+                  <span
+                    class="record-name"
+                    style="font-size: 22px;"
+                  >{{this.name}}</span>
                   <span class="record-date">{{this.date}}</span>
                 </div>
                 <div class="d-flex align-items-center action-group">
@@ -80,6 +95,7 @@
       </div>
     </div>
   </body>
+</script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
