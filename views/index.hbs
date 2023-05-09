@@ -2,13 +2,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>家庭記帳本</title>
+    <title>私人記帳本</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <style>
       .list-group-item:nth-child(odd) { background-color: #f8f9fa; }
+      .record-info { display: flex; align-items: center; } .record-date {
+      margin-left: 10px; font-size: 0.9rem; color: #6c757d; } .amount {
+      font-size: 20px; font-weight: bold; margin-left: 20px; margin-right: 20px;
+      } .btn-edit-delete { display: inline-flex; align-items: center; }
+      .btn-edit, .btn-delete { border: none; color: white; padding: 10px;
+      margin: 2px; font-size: 12px; cursor: pointer; } .category-icon {
+      margin-right: 10px; } .record-name { margin-right: 10px; } .action-buttons
+      { display: flex; align-items: center; } .btn-edit, .btn-delete {
+      background-color: transparent; border: none; color: inherit;
+      text-decoration: none; cursor: pointer; } .btn-edit, .btn-delete {
+      background-color: transparent; border: none; color: inherit;
+      text-decoration: none; cursor: pointer; }
     </style>
   </head>
   <body>
@@ -17,22 +29,9 @@
         <div class="card-body">
           <div class="form-group">
             <select class="form-control" id="category">
-              <option>類別</option>
-              <option>家居物業</option>
-              <option>交通出行</option>
-              <option>休閒娛樂</option>
-              <option>餐飲食品</option>
-              <option>其他</option>
-            </select>
-            {{!-- <select
-              id="categoryOptions"
-              class="form-control"
-              name="categoryId"
-              required
-            >
               {{#each categories}}
                 <option value="{{this._id}}">{{this.name}}</option>
-              {{/each}} --}}
+              {{/each}}
             </select>
           </div>
           <h2 class="text-center mb-4">總金額：{{totalAmount}}</h2>
@@ -41,24 +40,35 @@
               <li
                 class="list-group-item d-flex justify-content-between align-items-center"
               >
-                <div>
-                  <img
-                    src="{{icon}}"
-                    alt="{{category}}"
-                    width="30"
-                    height="30"
-                  />
-                  <span>{{name}}</span>
-                  <small>{{date}}</small>
+                <div class="record-info">
+                  <i class="fas {{this.categoryId.icon}} category-icon"></i>
+                  <span class="record-name" style="font-size: 22px;">{{this.name}}</span>
+                  <span class="record-date">{{this.date}}</span>
                 </div>
-                <div>
-                  <span class="badge badge-primary badge-pill">{{amount}}</span>
-                  <span class="badge badge-primary badge-pill mr-3">100</span>
-                  <a
-                    class="btn btn-sm btn-warning"
-                    href="/records/edit"
-                  >修改</a>
-                  <button class="btn btn-sm btn-danger">刪除</button>
+                <div class="d-flex align-items-center action-group">
+                  <span class="badge badge-primary badge-pill amount">
+                    $
+                    {{this.amount}}
+                  </span>
+                  <div class="btn-edit-delete">
+                    <a
+                      class="btn btn-success btn-edit d-flex justify-content-end flex-wrap"
+                      href="/records/{{this._id}}/edit"
+                    >
+                      修改
+                    </a>
+                    <form
+                      class="btn-delete"
+                      action="/records/{{this._id}}?_method=DELETE"
+                      method="POST"
+                      style="display: inline;"
+                    >
+                      {{! 刪除 }}
+                      <button type="submit" class="btn-delete btn btn-danger">
+                        刪除
+                      </button>
+                    </form>
+                  </div>
                 </div>
               </li>
             {{/each}}
@@ -69,12 +79,9 @@
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    ></script>
   </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+  ></script>
 </html>

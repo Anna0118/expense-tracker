@@ -3,11 +3,10 @@
     <div class="col-12 col-lg-10 col-xl-8 mx-auto">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">請輸入你的支出
-            <small>*必填欄位</small>
+          <h5 class="card-title">編輯支出
             <i class="fas fa-edit"></i></h5>
           <hr />
-          <form method="POST" action="/records">
+          <form method="POST" action="/records/{{userRecord._id}}?_method=PUT">
             <div class="row mb-3 g-2">
               <label for="name" class="col-md-4 col-form-label">
                 名稱*
@@ -18,6 +17,7 @@
                   name="name"
                   class="form-control"
                   id="name"
+                  value="{{userRecord.name}}"
                   required
                 />
               </div>
@@ -32,6 +32,7 @@
                   name="date"
                   class="form-control"
                   id="date"
+                  value="{{userRecord.date}}"
                   required
                 />
               </div>
@@ -42,35 +43,35 @@
               </label>
               <div class="col-md-8">
                 <select
-                  id="categoryOptions"
+                  id="category"
                   class="form-control"
                   name="category"
+                  {{!-- value="{{userRecord.categoryId}}" --}}
                   required
                 >
-                  <option>家居物業</option>
-                  <option>交通出行</option>
-                  <option>休閒娛樂</option>
-                  <option>餐飲食品</option>
-                  <option>其他</option>
+                  {{#each categories}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                  {{/each}}
                 </select>
               </div>
             </div>
             <div class="row mb-3 g-2">
               <label for="cost" class="col-md-4 col-form-label">
-                金額
+                金額＊
               </label>
               <div class="col-md-8">
                 <input
                   type="number"
-                  name="cost"
+                  name="amount"
                   class="form-control"
-                  id="cost"
+                  id="amount"
+                  value="{{userRecord.amount}}"
                   required
                 />
               </div>
             </div>
             <div class="text-center">
-              <button class="btn btn-primary" type="submit">新增</button>
+              <button class="btn btn-success" type="submit">儲存</button>
               <a href="/">
                 <button
                   class="btn btn-outline-secondary"

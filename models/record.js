@@ -7,11 +7,15 @@ const recordSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    required: true,
   },
   amount: {
     type: Number,
     default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
   userId: {
     // 加入關聯設定

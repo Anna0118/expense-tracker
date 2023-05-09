@@ -45,13 +45,13 @@
               </label>
               <div class="col-md-8">
                 <select
-                  id="categoryOptions"
+                  id="category"
                   class="form-control"
-                  name="category"
+                  name="categoryId"
                   required
                 >
                   {{#each categories}}
-                    <option value="{{this._id}}">{{this.name}}</option>
+                    <option value={{this._id}}>{{this.name}}</option>
                   {{/each}}
                 </select>
               </div>
@@ -63,9 +63,9 @@
               <div class="col-md-8">
                 <input
                   type="number"
-                  name="cost"
+                  name="amount"
                   class="form-control"
-                  id="cost"
+                  id="amount"
                   required
                 />
               </div>

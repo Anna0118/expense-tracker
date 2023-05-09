@@ -3,6 +3,7 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const helpers = require("handlebars-helpers")();
 const flash = require("connect-flash");
 
 if (process.env.NODE_ENV !== "production") {
@@ -25,6 +26,7 @@ app.engine(
       allowProtoPropertiesByDefault: true,
       allowProtoMethodsByDefault: true,
     },
+    helpers,
   })
 );
 app.set("view engine", "hbs");
