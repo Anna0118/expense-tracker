@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-const recordList = require("../../seeder.json").results;
+const recordList = require("./seeder.json").results;
 const SEED_USER = require("./user.json");
 console.log(SEED_USER);
 
