@@ -1,6 +1,6 @@
 ## 私人記帳本
 
-![image](https://github.com/Anna0118/expanse-tracker/blob/main/public/demo.png)
+![image](https://github.com/Anna0118/expanse-tracker/tree/main/public/demo.png)
 
 ## 介紹
 
