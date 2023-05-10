@@ -50,7 +50,7 @@
                   required
                 >
               {{#each categories}}
-                <option value="{{this._id}}">{{this.name}}</option>
+              <option {{#if this.isSelected}} selected {{/if}} value="{{ this._id }}">{{ this.name }}</option>
               {{/each}}
                 </select>
               </div>
