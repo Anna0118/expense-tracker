@@ -1,12 +1,13 @@
 ## 私人記帳本
 
-![image](https://github.com/Anna0118/expanse-tracker/tree/main/public/demo.png)
+![image](https://github.com/Anna0118/expense-tracker/tree/main/public/demo.png)
 
 ## 介紹
 
 這是一個專為使用者記錄支出而設計的網路記帳工具，可以新增、修改與刪除支出紀錄
 
 ### 功能
+
 - 使用者可註冊帳號並登入/登出
 - 在首頁一次瀏覽所有支出的清單
 - 在首頁看到所有支出清單的總金額
@@ -16,6 +17,7 @@
 - 根據「類別」篩選支出
 
 ### 環境建置
+
 - Node.js
 - Node Package manager
 - Nodemon
@@ -39,7 +41,7 @@ npm install
 
 ```
 
-3.設定env，可餐考.env.example
+3.設定 env，可餐考.env.example
 
 4.產生種子資料
 
@@ -50,6 +52,7 @@ npm run recordSeeder
 ```
 
 5.啟動伺服器
+
 ```
 npm run dev
 ```
@@ -61,6 +64,3 @@ App is running on http://localhost:3000
 ```
 
 7.你可以在瀏覽器輸入 http://localhost:3000 瀏覽內容
-
-
-
