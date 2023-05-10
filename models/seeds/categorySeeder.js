@@ -27,6 +27,10 @@ db.on("error", () => {
 
 db.once("open", async () => {
   try {
+    // mongodb: Delete multiple documents from a collection
+    // 避免重複新增種子資料
+    await Category.deleteMany({});
+
     await Promise.all(
       SEED_CATEGORY.map(async (category) => {
         await Category.create(category);
